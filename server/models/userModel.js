@@ -1,18 +1,5 @@
 import db from '../config/db.js';
 
-export const getAllUsers = () => {
-    return new Promise((resolve, reject) => {
-      const sql = 'SELECT id, username, email, role, created_at FROM users';
-      db.query(sql, (err, results) => {
-        if (err) {
-          reject(err);  // Reject the promise if there's an error
-        } else {
-          resolve(results);  // Resolve the promise with the results
-        }
-      });
-    });
-  };
-
 // Register user
 export const createUser = (username, email, password, role, callback) => {
     const sql = `INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)`;
