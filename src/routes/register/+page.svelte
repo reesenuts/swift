@@ -90,7 +90,7 @@
     // Handle "Log In" click
     function handleLogIn(): void {
       // Redirect to login page or show login modal
-      window.location.href = '/login';
+      window.location.href = '/admin/user-management';
     }
 </script>
   
