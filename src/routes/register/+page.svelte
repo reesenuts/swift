@@ -13,7 +13,7 @@
     <!-- swift logo -->
     <img src="assets/logo.svg" alt="logo" class="w-28 h-24" />
     <p class="text-sm text-[#1e1e1e] font-semibold">Let's create your swift account</p>
-    <!-- login form -->
+    <!-- register form -->
     <form action="" class="w-90 mb-10 mt-8">
         <div class="flex flex-col gap-2 mb-4">
             <!-- email -->

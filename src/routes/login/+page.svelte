@@ -55,7 +55,9 @@
         </button>
     </form>
     <!-- forgot password -->
-    <p class="text-sm underline font-medium cursor-pointer text-[#37352F]">Forgot Password?</p>
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <p class="text-sm underline font-medium cursor-pointer text-[#37352F]" on:click="{() =>  goto("forgot-password")}">Forgot Password?</p>
     <!-- sign up -->
     <!-- svelte-ignore a11y_click_events_have_key_events -->
     <!-- svelte-ignore a11y_no_static_element_interactions -->
