@@ -1,11 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import 'tailwindcss';
 
-html {
-  font-size: 16px;
+:root {
+  --sinister: #37352F;
+  --silk: #F3F3F3;
+  --placebo: #E7E7E7;
+  --bedrock: #9E9D9A;
+  --bleu: #2383E2;
+  --moon: #7D7C78;
+  --lynx: #F7F7F7;
+  --dash: #EBEBE8;
+  --graphite: #A5A4A1;
+  
+}
+
+html,body {
   font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
 }
 
 h1 {
-    font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 0;
+}
+::-webkit-scrollbar-track {
+  background: none;
+}
+::-webkit-scrollbar-thumb {
+  background: none;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: none;
 }
