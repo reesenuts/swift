@@ -1,4 +1,10 @@
 <script>
+    import { goto } from '$app/navigation';
+
+    function navigateToRegister() {
+        goto('/register');
+    }
+
     let showPassword = false;
     let password = "";
 </script>
@@ -51,5 +57,9 @@
     <!-- forgot password -->
     <p class="text-sm underline font-medium cursor-pointer text-[#37352F]">Forgot Password?</p>
     <!-- sign up -->
-    <p class="text-sm text-[#A5A4A1] mt-24">Don't have an account? <span class="text-[#443C68] cursor-pointer font-semibold">Sign Up</span></p>
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
+    <p class="text-sm text-[#A5A4A1] mt-24">Don't have an account? 
+        <span class="text-[#443C68] cursor-pointer font-semibold" on:click={navigateToRegister}>Sign Up</span>
+    </p>
 </div>
