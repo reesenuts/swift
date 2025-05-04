@@ -14,6 +14,15 @@ const isStrongPassword = (password) => {
   return passwordRegex.test(password);
 };
 
+const getUserAsync = (email) => {
+  return new Promise((resolve, reject) => {
+    getUser(email, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
+
 export const registerUser = async (req, res) => {
     const { email, password } = req.body;
     const username = email.split('@')[0]; 
@@ -49,7 +58,13 @@ export const registerUser = async (req, res) => {
         // Save to DB
         createUser(username, email, hashedPassword, role, (err, result) => {
           if (err) {
-            return res.status(500).json({ success: false, message: 'DB error', error: err.message, result: result });
+            const errorMessage =
+              err.code === 'ER_DUP_ENTRY' ? 'User already exists.' : 'DB error';
+            return res.status(500).json({
+              success: false,
+              message: errorMessage,
+              error: err.message
+            });
           }
           return res.status(201).json({ success: true, message: 'User registered successfully!', user: { username, email, role }});
         });
