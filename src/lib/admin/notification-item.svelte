@@ -1,27 +1,33 @@
-<!-- table header -->
-<div class="w-full flex justify-between items-center p-4 rounded-lg gap-4 border-1 border-[#EBEBE8]">
-  <!-- username -->
-  <div  class="text-sm text-[#818181] font-medium pl-2 w-[25%] flex items-center gap-4">
-    <!-- avatar -->
-    <div class="h-10 w-10 rounded-full text-sm flex items-center justify-center font-semibold text-[#443C68] bg-[#443c6836]">
-      A
+<!-- table head -->
+ <div class="w-full flex justify-between items-center p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
+    <p class="text-sm text-[#818181] font-medium pl-2 w-[5%]">001</p>
+    <!-- username -->
+    <div  class="text-sm text-[#818181] font-medium pl-2 w-[25%] flex items-center gap-4">
+        <!-- avatar -->
+        <div class="h-10 w-10 rounded-full text-sm flex items-center justify-center font-semibold text-[#443C68] bg-[#443c6836]">
+            A
+        </div>
+        <!-- username and email -->
+        <div class="text-xs">
+        <p class="text-[#443C68] font-semibold">andrei.mayo</p>
+        <p class="text-[#A5A4A1]">andrei.mayo@gmail.com</p>
+        </div>
     </div>
-    <!-- username and email -->
-    <div class="text-xs">
-      <p class="text-[#443C68] font-semibold">andrei.mayo</p>
-      <p class="text-[#A5A4A1]">andrei.mayo@gmail.com</p>
+    <!-- message -->
+    <div class="text-sm text-[#443C68] w-[25%] font-medium p-2 rounded-lg bg-[#443c681c] truncate">
+        Reminder. You have a meeting with the client at 3:00 PM. Please be on time.
     </div>
-  </div>
-  <!-- message -->
-  <div class="text-sm text-[#443C68] w-[40%] font-medium p-2 rounded-lg bg-[#443c681c] truncate">
-    Reminder. You have a meeting with the client at 3:00 PM. Please be on time.
-  </div>
-  <!-- schedule -->
-  <p class="text-sm text-[#818181] font-medium w-[20%] pl-10">
-    May 04, 2025 11:26 AM
-  </p>
-  <!-- status -->
-  <div class="text-sm text-[#6C9B7D] font-medium w-[15%] bg-[#DBEDDB] p-2 text-center rounded-lg">
-    Sent
-  </div>
+    <div class="text-sm text-[#6C9B7D] font-medium w-[15%] bg-[#DBEDDB] p-2 text-center rounded-lg ml-10">
+        Sent
+    </div>
+    <p class="text-sm text-[#818181] font-medium w-[20%] pl-10">
+        May 04, 2025 11:26 AM
+    </p>
+    <button class="text-sm text-[#818181] font-medium w-[10%] p-2 rounded-lg flex items-center gap-2 justify-center bg-[#FFE2DD] cursor-pointer hover:bg-[#e16e643f] transition duration-200 ease-in-out">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#E16F64" viewBox="0 0 256 256">
+            <path d="M216,48H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM192,208H64V64H192ZM80,24a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,24Z"></path>
+        </svg>
+        <p class="text-[#E16F64]">Delete</p>
+    </button>
 </div>
+  

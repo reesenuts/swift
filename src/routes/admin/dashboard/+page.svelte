@@ -1,5 +1,6 @@
 <script>
-  import NotificationItem from "$lib/admin/notification-item.svelte";
+  import Dashnotif from "$lib/admin/dashnotif.svelte";
+import NotificationItem from "$lib/admin/dashnotif.svelte";
 </script>
 
 <div class="w-full">
@@ -93,6 +94,6 @@
       <p class="text-sm text-[#818181] font-medium w-[15%]">Status</p>
     </div>
     <!-- lib/admin/notification.svelte -->
-    <NotificationItem />
+    <Dashnotif />
   </div>
 </div>
