@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { goto } from '$app/navigation';
 
     function navigateToLogin() {
@@ -6,7 +6,35 @@
     }
 
     let showPassword = false;
+    let email = "";
     let password = "";
+
+    async function handleRegister(event: Event) {
+        event.preventDefault();
+    
+    try {
+        const response = await fetch('http://localhost:3000/api/register', {
+            method: 'POST',
+            headers: 
+            {
+                'Content-type':'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert('Account created successfully!');
+            goto('/login');
+        } else {
+            alert(data.message || 'Registration failed');
+        }
+    } catch (error) {
+        console.error('Registration error:', error);
+        alert('Something went wrong!');
+    }
+}
 </script>
 
 <div class="flex flex-col items-center justify-center h-screen">
@@ -14,13 +42,15 @@
     <img src="assets/logo.svg" alt="logo" class="w-28 h-24" />
     <p class="text-sm text-[#1e1e1e] font-semibold">Let's create your swift account</p>
     <!-- register form -->
-    <form action="" class="w-90 mb-10 mt-8">
+    <form action="" class="w-90 mb-10 mt-8" on:submit|preventDefault={handleRegister}>
         <div class="flex flex-col gap-2 mb-4">
             <!-- email -->
             <input class="border-1 border-[#EBEBE8] rounded-2xl p-4 w-full text-[#222831] focus:border-[#c6c6c4] focus:text-[#222831] focus:outline-none"
                 type="email"
                 placeholder="your@email.com"
-                required />
+                bind:value={email}
+                required 
+                />
 
             <!-- password -->
             <div class="relative">
@@ -28,7 +58,9 @@
                     type={showPassword ? "text" : "password"}
                     id="password"
                     placeholder="password"
-                    bind:value={password} />
+                    bind:value={password} 
+                    required
+                    />
 
                 {#if password}
                     <button class="absolute inset-y-0 right-3 flex items-center"

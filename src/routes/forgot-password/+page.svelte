@@ -1,12 +1,12 @@
-<script>
+<script lang="ts">
     import { goto } from '$app/navigation';
 
     function navigateToLogin() {
         goto('/login');
     }
 
-    let showPassword = false;
-    let password = "";
+    let email = "";
+
 </script>
 
 <div class="flex flex-col items-center justify-center h-screen">
@@ -21,12 +21,14 @@
             <input class="border-1 border-[#EBEBE8] rounded-2xl p-4 w-full text-[#222831] focus:border-[#c6c6c4] focus:text-[#222831] focus:outline-none"
                 type="email"
                 placeholder="your@email.com"
-                required />
+                bind:value={email}
+                required 
+                />
         </div>
         <!-- submit button -->
         <button class="bg-[#443C68] text-[#FFFFFF] font-medium text-center text-sm rounded-4xl p-4 w-full cursor-pointer hover:bg-[#332d4d] transition duration-200 ease-in-out"
             type="submit"
-            on:click|preventDefault={() => goto('forgot-password/otp')}>
+        >
             Continue
         </button>
     </form>

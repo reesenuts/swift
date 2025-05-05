@@ -1,5 +1,6 @@
 import express from 'express';
 import { registerUser, loginUser, forgetPass} from '../controllers/userController.js';
+// import { verifyApiKey } from '../middleware/verifyApiKey.js';
 
 const router = express.Router();
 

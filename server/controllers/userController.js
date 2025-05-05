@@ -100,21 +100,23 @@ export const loginUser = async (req, res) => {
         }
 
         //Generate token
-        const token = jwt.sign(
-          {
-           id: user.id, 
-           email: user.email, 
-           username: user.username, 
-           role: user.role 
-          },
-          process.env.JWT_SECRET,
-          { expiresIn: '12h' },
-        );
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        return res.status(200).json({ success: true, message: "Login successfully.", 
-          token, 
-          user: { id: user.id, email: user.email, username: user.username, role: user.role } 
+        res.cookie('token', token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          maxAge: 3600000,
+          sameSite: 'Strict',
         });
+        return res.status(200).json({ 
+          success: true,
+          message: 'Login successfully.', 
+          user: {
+          id: user.id,
+          role: user.role,
+          email: user.email,
+          username: user.username
+        }});
       });
     } catch (error) {
       console.error('Error during user login:', error);
@@ -158,3 +160,4 @@ export const forgetPass = async (req, res) => {
     return res.status(500).json({ success: false, message: "Error during password reset.", error: error.message });
   }
 };
+

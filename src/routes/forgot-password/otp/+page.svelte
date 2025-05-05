@@ -1,12 +1,14 @@
-<script>
+<script lang="ts">
     import { goto } from '$app/navigation';
+    import { onMount } from 'svelte';
 
     function navigateToLogin() {
         goto('/login');
     }
 
-    let showPassword = false;
-    let password = "";
+    let otp = ['', '', '', '', ''];
+    let email = "";
+
 </script>
 
 <div class="flex flex-col items-center justify-center h-screen">
@@ -16,15 +18,20 @@
     <!-- forgot password -->
     <form action="" class="w-90 mb-10">
         <div class="flex flex-col gap-2 mb-4">
-            <p class="text-sm font-medium text-[#1e1e1e] text-center mb-4">we sent a code to your@email.com</p>
+            <p class="text-sm font-medium text-[#1e1e1e] text-center mb-4">we sent a code to <strong>{email}</strong></p>
             <!-- otp -->
             <div class="flex gap-2 justify-center mb-4">
-                <div class="w-full h-14 border-1 border-[#EBEBE8] rounded-2xl"></div>
-                <div class="w-full h-14 border-1 border-[#EBEBE8] rounded-2xl"></div>
-                <div class="w-full h-14 border-1 border-[#EBEBE8] rounded-2xl"></div>
-                <div class="w-full h-14 border-1 border-[#EBEBE8] rounded-2xl"></div>
-                <div class="w-full h-14 border-1 border-[#EBEBE8] rounded-2xl"></div>
-            </div>
+                {#each otp as val, index}
+                  <input
+                    id={"otp-" + index}
+                    type="text"
+                    maxlength="1"
+                    class="w-12 h-14 text-center text-lg border border-[#EBEBE8] rounded-2xl focus:outline-none"
+                    bind:value={otp[index]}
+                  />
+                {/each}
+              </div>
+              
             <p class="text-sm text-[#A5A4A1] text-center">didn't receive the email?
                 <span class="text-[#1e1e1e] cursor-pointer font-medium underline">click resend</span>
             </p>
