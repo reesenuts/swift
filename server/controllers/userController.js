@@ -1,6 +1,20 @@
-import { createUser, getUser, updatePass} from '../models/userModel.js';
+import { getAllUsers as getAllUsersFromDB, createUser, getUser, updatePass } from '../models/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
+//user-management get all user
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await getAllUsersFromDB(); // Fetch users from the database
+    if (users && Array.isArray(users)) {
+      return res.json({ success: true, users }); // Make sure to send users as part of the response
+    } else {
+      return res.status(404).json({ success: false, message: 'No users found.' });
+    }
+  } catch (err) {
+    return res.status(500).json({ success: false, error: 'Failed to fetch users' });
+  }
+};
 
 // Email validation regex
 const isValidEmail = (email) => {

@@ -1,5 +1,64 @@
-<script lang="ts">
+<script>
+  import { onMount } from 'svelte';
   import UsersItem from "$lib/admin/users-item.svelte";
+  
+  let users = [];
+  
+  onMount(async () => {
+    try {
+      console.log('Fetching users from API...');
+      const res = await fetch('http://localhost:3000/api/users/all');
+      
+      console.log('API response status:', res.status);
+      // Check if response is ok before parsing JSON
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      
+      const data = await res.json();
+      console.log('API response data:', data);
+      
+      if (data.success) {
+        users = data.users.map(user => ({
+          ...user,
+          selected: false,
+          status: 'Active', // You can update this to match real data if available
+          dateCreated: new Date(user.created_at).toLocaleDateString(),
+          initial: user.username ? user.username[0].toUpperCase() : 'U'
+        }));
+        console.log('Processed users:', users);
+      } else {
+        console.error('API returned success: false', data.message);
+      }
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      // For development - add some sample data when API fails
+      users = [
+        {
+          id: 1,
+          username: 'reesenuts',
+          email: 'reesenuts@gmail.com',
+          role: 'admin',
+          created_at: '2025-04-15T12:00:00',
+          selected: false,
+          status: 'Active',
+          dateCreated: 'Apr 15, 2025',
+          initial: 'R'
+        },
+        {
+          id: 2,
+          username: 'andrei.mayo',
+          email: 'andrei.mayo@gmail.com',
+          role: 'user',
+          created_at: '2025-05-04T12:00:00',
+          selected: false,
+          status: 'Inactive',
+          dateCreated: 'May 04, 2025',
+          initial: 'A'
+        }
+      ];
+    }
+  });
 </script>
 
 <div class="w-full">
@@ -28,7 +87,7 @@
         </div>
       </div>
   
-      <!-- notifications -->
+      <!-- users table -->
       <div class="p-6 w-full">
       <!-- table head -->
       <div class="w-full flex justify-between items-center bg-[#FCFCFA] p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
@@ -40,7 +99,6 @@
         <p class="text-sm text-[#818181] font-medium w-[20%]">Actions</p>
       </div>
       <!-- users items -->
-      <UsersItem />
+      <UsersItem {users} />
     </div>
   </div>
-  
