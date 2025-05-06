@@ -22,12 +22,32 @@
     allSelected = users.every(user => user.selected);
   }
   
-  function handleStatusChange(userId, status) {
-    console.log('Status change:', userId, status);
-    users = users.map(user => 
-      user.id === userId ? { ...user, status } : user
-    );
+  async function handleStatusChange(userId, status) {
+  const is_active = status === 'Active';
+
+  try {
+    const res = await fetch(`http://localhost:3000/api/users/${userId}/status`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ is_active })
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      users = users.map(user =>
+        user.id === userId ? { ...user, status } : user
+      );
+      console.log(`User ${userId} status updated to ${status}`);
+    } else {
+      alert(`Failed to update status: ${result.message}`);
+    }
+  } catch (error) {
+    console.error('Error updating status:', error);
+    alert('An error occurred while updating user status.');
   }
+}
   
   function handleRoleChange(userId, role) {
     users = users.map(user => 
@@ -35,10 +55,26 @@
     );
   }
   
-  function handleDeleteUser(userId) {
-    console.log('Delete user:', userId);
-    users = users.filter(user => user.id !== userId);
+  async function handleDeleteUser(userId) {
+  if (!confirm("Are you sure you want to delete this user?")) return;
+
+  try {
+    const res = await fetch(`http://localhost:3000/api/users/${userId}`, {
+      method: 'DELETE'
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      users = users.filter(user => user.id !== userId);
+      console.log('User deleted:', userId);
+    } else {
+      alert(`Failed to delete user: ${result.message}`);
+    }
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    alert('An error occurred while deleting the user.');
   }
+}
   </script>
   
   {#if users.length === 0}

@@ -20,12 +20,12 @@
       
       if (data.success) {
         users = data.users.map(user => ({
-          ...user,
-          selected: false,
-          status: 'Active', // You can update this to match real data if available
-          dateCreated: new Date(user.created_at).toLocaleDateString(),
-          initial: user.username ? user.username[0].toUpperCase() : 'U'
-        }));
+              ...user,
+              selected: false,
+              status: user.is_active ? 'Active' : 'Inactive',
+              dateCreated: new Date(user.created_at).toLocaleDateString(),
+              initial: user.username ? user.username[0].toUpperCase() : 'U'
+          }));
         console.log('Processed users:', users);
       } else {
         console.error('API returned success: false', data.message);
