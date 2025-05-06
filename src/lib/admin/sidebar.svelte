@@ -4,6 +4,7 @@
     import { onMount } from 'svelte';
     
     let activePath = 'dashboard';
+    let currentUser = { username: '', email: '' };
 
     $: {
         const path = $page.url.pathname;
@@ -18,6 +19,56 @@
     function handlePathClick(path: string) {
         goto(`/${path}`);
     }
+
+    onMount(async () => {
+    try {
+        const token = localStorage.getItem('authToken'); 
+        if (!token) {
+            console.error('No token found');
+            goto('/login');
+            return;
+        }
+
+        const response = await fetch('http://localhost:3000/api/...', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        currentUser = data;
+      } else {
+        console.error('Not authenticated');
+        goto('/login');
+      }
+    } catch (err) {
+      console.error('Error fetching user:', err);
+    }
+  });
+
+    async function handleLogout(){
+        try {
+            const response = await fetch('http://localhost:3000/api/logout', {
+                method: 'POST',
+                credentials: 'include',
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+                goto('/login');
+            } else {
+                alert(data.message || 'Logout failed');
+            }
+        } catch (error) {
+            console.error('Logout error:', error);
+            alert('Something went wrong during logout!');
+        }
+    }
+
 </script>
 
 <div class="w-80 h-screen flex flex-col justify-between p-6">
@@ -92,12 +143,12 @@
         <div class="bg-[#f9f9f9] flex items-center gap-2 p-2 rounded-full">
             <div class="h-10 w-10 rounded-full text-sm flex items-center justify-center font-semibold text-[#443C68] bg-[#443c6836]">R</div>
             <div class="text-xs">
-                <p class="text-[#443C68] font-semibold">reesenuts</p>
-                <p class="text-[#A5A4A1]">reesenuts@gmail.com</p>
+                <p class="text-[#443C68] font-semibold">{currentUser.username}</p>
+                <p class="text-[#A5A4A1]">{currentUser.email}</p>
             </div>
         </div>
         <!-- logout button -->
-        <button class="bg-[#FFE2DD] text-[#E16F64] text-sm p-3 rounded-full w-full cursor-pointer hover:bg-[#F9CFCB] transition duration-200 ease-in-out flex items-center justify-center">
+        <button on:click={handleLogout} class="bg-[#FFE2DD] text-[#E16F64] text-sm p-3 rounded-full w-full cursor-pointer hover:bg-[#F9CFCB] transition duration-200 ease-in-out flex items-center justify-center">
             Log Out
         </button>
     </div>

@@ -24,6 +24,10 @@
 
         if (response.ok) {
             alert('Login successfully');
+            
+            if (data.token) {
+                    localStorage.setItem('authToken', data.token);
+                }
 
             if (data.user.role === 'admin') {
                 goto('/admin/dashboard');

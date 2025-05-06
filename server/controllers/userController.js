@@ -16,6 +16,16 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+export const fetchCurrentUser = async (req, res) => {
+  try {
+    const { username, email } = req.user;
+    return res.json({ success: true, data: username, email });
+  } catch (error) {
+    console.error('Fetching my credentials error:', error);
+    return res.status(500).json({ success: false, message: 'Server error during fetch.', error: error.message });
+  }
+};
+
 // Email validation regex
 const isValidEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -114,7 +124,11 @@ export const loginUser = async (req, res) => {
         }
 
         //Generate token
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign(
+          { id: user.id, role: user.role, username: user.username, email: user.email },
+           process.env.JWT_SECRET,
+          { expiresIn: '1h' }
+          );
 
         res.cookie('token', token, {
           httpOnly: true,
@@ -125,6 +139,7 @@ export const loginUser = async (req, res) => {
         return res.status(200).json({ 
           success: true,
           message: 'Login successfully.', 
+          token: token,
           user: {
           id: user.id,
           role: user.role,
@@ -138,40 +153,55 @@ export const loginUser = async (req, res) => {
     }
 };
 
-export const forgetPass = async (req, res) => {
-  const { email, newPassword } = req.body;
-
-  // Check if Password is at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number
-  if (!isStrongPassword(newPassword)) {
-    return res.status(400).json({ success: false, message: "Password must be at least 8 characters long and include uppercase, lowercase, and a number." });
-  }
-  
+export const logoutUser = async (req, res) => {
   try {
-    // Check if the user exists
-    getUser(email, async (err,  results) => {
-      if (err) {
-        return res.status(500).json({ success: false, message: "Database error", error: err.message });
-      }
-      // Check if user exists
-      if (results.length === 0) {
-        return res.status(404).json({ success: false, message: "User not found." });
-      }
-
-      // Password hashing
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-      // Update password
-      updatePass(email, hashedPassword, (err, result) => {
-        if (err) {
-          return res.status(500).json({ success : false, message: "Failed to update password.", error: err.message });
-        }
-
-        return res.status(200).json({ success: true, message: "Password reset successful." });
-      });
+    res.clearCookie('token', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'Strict',
     });
+    return res.status(200).json({ success: true, message: 'Logout successfully.' });
   } catch (error) {
-    console.error('Error during password reset:', error.message);
-    return res.status(500).json({ success: false, message: "Error during password reset.", error: error.message });
+    console.error('Logout error:', error);
+    return res.status(500).json({ success: false, message: 'Server error during logout', error: error.messgae });
   }
 };
+
+
+// export const forgetPass = async (req, res) => {
+//   const { email, newPassword } = req.body;
+
+//   // Check if Password is at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number
+//   if (!isStrongPassword(newPassword)) {
+//     return res.status(400).json({ success: false, message: "Password must be at least 8 characters long and include uppercase, lowercase, and a number." });
+//   }
+  
+//   try {
+//     // Check if the user exists
+//     getUser(email, async (err,  results) => {
+//       if (err) {
+//         return res.status(500).json({ success: false, message: "Database error", error: err.message });
+//       }
+//       // Check if user exists
+//       if (results.length === 0) {
+//         return res.status(404).json({ success: false, message: "User not found." });
+//       }
+
+//       // Password hashing
+//       const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+//       // Update password
+//       updatePass(email, hashedPassword, (err, result) => {
+//         if (err) {
+//           return res.status(500).json({ success : false, message: "Failed to update password.", error: err.message });
+//         }
+
+//         return res.status(200).json({ success: true, message: "Password reset successful." });
+//       });
+//     });
+//   } catch (error) {
+//     console.error('Error during password reset:', error.message);
+//     return res.status(500).json({ success: false, message: "Error during password reset.", error: error.message });
+//   }
+// };
 

@@ -24,12 +24,12 @@ export const verifyToken = (req, res, next) => {
     return res.status(401).json({ success: false, message: 'Unauthorized: Token missing or malformed' });
   }
 
-  const token = authHeader.split(' ')[1]; // Extract token
+  const token = authHeader.split(' ')[1]; 
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Validate token
-    req.user = decoded; // Attach user data to request
-    next(); // Continue to route handler
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; 
+    next(); 
   } catch (err) {
     return res.status(403).json({ success: false, message: 'Invalid or expired token' });
   }
