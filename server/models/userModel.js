@@ -15,6 +15,18 @@ export const getAllUsers = () => {
     });
   };
 
+  // Delete user by ID
+export const deleteUserById = (id, callback) => {
+  const sql = 'DELETE FROM users WHERE id = ?';
+  db.query(sql, [id], callback);
+};
+
+// Toggle user active status
+export const setUserStatus = (id, is_active, callback) => {
+  const sql = 'UPDATE users SET is_active = ? WHERE id = ?';
+  db.query(sql, [is_active, id], callback);
+};
+
 // Register user
 export const createUser = (username, email, password, role, callback) => {
     const sql = `INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)`;
