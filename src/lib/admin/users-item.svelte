@@ -26,7 +26,7 @@
   const is_active = status === 'Active';
 
   try {
-    const res = await fetch(`http://localhost:3000/api/users/${userId}/status`, {
+    const res = await fetch(`http://localhost:3000/api/admin/users/${userId}/status`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -59,7 +59,7 @@
   if (!confirm("Are you sure you want to delete this user?")) return;
 
   try {
-    const res = await fetch(`http://localhost:3000/api/users/${userId}`, {
+    const res = await fetch(`http://localhost:3000/api/admin/users/${userId}`, {
       method: 'DELETE'
     });
 

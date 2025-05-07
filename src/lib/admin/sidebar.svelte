@@ -4,8 +4,12 @@
     import { onMount } from 'svelte';
     
     let activePath = 'dashboard';
-    let currentUser = { username: '', email: '' };
-
+    let currentUser = { 
+        username: '', 
+        email: '',
+        initial: '',
+    };
+     
     $: {
         const path = $page.url.pathname;
         if (path === '/') {
@@ -38,17 +42,23 @@
       const data = await response.json();
 
       if (response.ok) {
-        currentUser = data;
+        currentUser = {
+            username: data.username,
+            email: data.email,
+            initial: data.username ? data.username[0].toUpperCase() : ''
+        };
       } else {
         console.error('Not authenticated');
         goto('/login');
       }
     } catch (err) {
-      console.error('Error fetching user:', err);
+      console.error('Error fetching user:', err);   
     }
   });
 
     async function handleLogout(){
+        if (!confirm("Are you sure you want to logout?")) return;
+
         try {
             const response = await fetch('http://localhost:3000/api/logout', {
                 method: 'POST',
@@ -141,7 +151,7 @@
     <div class="space-y-2 mt-8">
         <!-- user profile -->
         <div class="bg-[#f9f9f9] flex items-center gap-2 p-2 rounded-full">
-            <div class="h-10 w-10 rounded-full text-sm flex items-center justify-center font-semibold text-[#443C68] bg-[#443c6836]">R</div>
+            <div class="h-10 w-10 rounded-full text-sm flex items-center justify-center font-semibold text-[#443C68] bg-[#443c6836]">{currentUser.initial}</div>
             <div class="text-xs">
                 <p class="text-[#443C68] font-bold">SWIFT ADMIN</p>
                 <p class="text-[#A5A4A1]">{currentUser.email}</p>

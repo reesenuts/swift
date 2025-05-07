@@ -1,66 +1,6 @@
-import { getAllUsers as getAllUsersFromDB, createUser, getUser, updatePass, deleteUserById, setUserStatus } from '../models/userModel.js';
+import { createUser, getUser } from '../models/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-
-//user-management get all user
-export const getAllUsers = async (req, res) => {
-  try {
-    const users = await getAllUsersFromDB(); // Fetch users from the database
-    if (users && Array.isArray(users)) {
-      return res.json({ success: true, users }); // Make sure to send users as part of the response
-    } else {
-      return res.status(404).json({ success: false, message: 'No users found.' });
-    }
-  } catch (err) {
-    return res.status(500).json({ success: false, error: 'Failed to fetch users' });
-  }
-};
-
-export const fetchCurrentUser = async (req, res) => {
-  try {
-    const { username, email } = req.user;
-    return res.json({ success: true, data: username, email });
-  } catch (error) {
-    console.error('Fetching my credentials error:', error);
-    return res.status(500).json({ success: false, message: 'Server error during fetch.', error: error.message });
-  }
-};
-
-// Delete user
-export const deleteUser = async (req, res) => {
-  const { id } = req.params;
-  try {
-    deleteUserById(id, (err, result) => {
-      if (err) {
-        return res.status(500).json({ success: false, message: 'Failed to delete user.', error: err.message });
-      }
-      return res.status(200).json({ success: true, message: 'User deleted successfully.' });
-    });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: 'Server error.', error: error.message });
-  }
-};
-
-// Enable/Disable user
-export const toggleUserStatus = async (req, res) => {
-  const { id } = req.params;
-  const { is_active } = req.body;
-
-  if (typeof is_active !== 'boolean') {
-    return res.status(400).json({ success: false, message: 'is_active must be a boolean.' });
-  }
-
-  try {
-    setUserStatus(id, is_active, (err, result) => {
-      if (err) {
-        return res.status(500).json({ success: false, message: 'Failed to update status.', error: err.message });
-      }
-      return res.status(200).json({ success: true, message: `User has been ${is_active ? 'enabled' : 'disabled'}.` });
-    });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: 'Server error.', error: error.message });
-  }
-};
 
 // Email validation regex
 const isValidEmail = (email) => {
@@ -187,6 +127,16 @@ export const loginUser = async (req, res) => {
       console.error('Error during user login:', error);
       return res.status(500).json({ success: false, message: 'Server error during login', error: error.message });
     }
+};
+
+export const fetchCurrentUser = async (req, res) => {
+  try {
+    const { username, email } = req.user;
+    return res.json({ success: true, username, email });
+  } catch (error) {
+    console.error('Fetching my credentials error:', error);
+    return res.status(500).json({ success: false, message: 'Server error during fetch.', error: error.message });
+  }
 };
 
 export const logoutUser = async (req, res) => {

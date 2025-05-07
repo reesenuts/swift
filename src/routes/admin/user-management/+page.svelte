@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import UsersItem from "$lib/admin/users-item.svelte";
   
@@ -7,7 +7,7 @@
   onMount(async () => {
     try {
       console.log('Fetching users from API...');
-      const res = await fetch('http://localhost:3000/api/users/all');
+      const res = await fetch('http://localhost:3000/api/admin/users/all');
       
       console.log('API response status:', res.status);
       // Check if response is ok before parsing JSON

@@ -6,6 +6,7 @@ import db from './config/db.js';
 
 // Import routes
 import userRoutes from './routes/userRoutes.js';
+import userManagement  from './routes/admin/userManagemet.js';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(cors({
 
 // Routes
 app.use('/api', userRoutes);
+app.use('/api', userManagement);
 
 // Default route
 app.get('/', (req, res) => {
