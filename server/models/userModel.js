@@ -2,14 +2,17 @@ import db from '../config/db.js';
 
 
 //get all user for user-management
-export const getAllUsers = () => {
+export const fetchAllUsers = (excludedId) => {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT id, username, email, role, created_at FROM users';
-      db.query(sql, (err, results) => {
+      const sql = `
+      SELECT id, username, email, role, is_active, created_at
+      FROM users
+      WHERE id != ?`;
+      db.query(sql, [excludedId], (err, results) => {
         if (err) {
-          reject(err);  // Reject the promise if there's an error
+          reject(err);  
         } else {
-          resolve(results);  // Resolve the promise with the results
+          resolve(results); 
         }
       });
     });
@@ -28,9 +31,9 @@ export const setUserStatus = (id, is_active, callback) => {
 };
 
 // Register user
-export const createUser = (username, email, password, role, callback) => {
-    const sql = `INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)`;
-    db.query(sql, [username, email, password, role], callback);
+export const createUser = (username, email, password, role, is_active, callback) => {
+    const sql = `INSERT INTO users (username, email, password, role, is_active) VALUES (?, ?, ?, ?, ?)`;
+    db.query(sql, [username, email, password, role, is_active], callback);
 }; 
 
 // Login user

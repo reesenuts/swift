@@ -29,7 +29,8 @@
     const res = await fetch(`http://localhost:3000/api/admin/users/${userId}/status`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`
       },
       body: JSON.stringify({ is_active })
     });
@@ -60,7 +61,11 @@
 
   try {
     const res = await fetch(`http://localhost:3000/api/admin/users/${userId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`
+      }
     });
 
     const result = await res.json();

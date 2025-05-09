@@ -15,7 +15,7 @@
         if (path === '/') {
             activePath = 'dashboard';
         } else {
-            const routeName = path.substring(1);
+            const routeName = path.split('/')[2];
             activePath = routeName;
         }
     }
@@ -33,10 +33,10 @@
             return;
         }
 
-        const response = await fetch('http://localhost:3000/api/...', {
+        const response = await fetch('http://localhost:3000/api/me', {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
             },
       });
       const data = await response.json();

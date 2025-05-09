@@ -1,9 +1,11 @@
-import { getAllUsers as getAllUsersFromDB, deleteUserById, setUserStatus } from '../../models/userModel.js';
+import { fetchAllUsers, deleteUserById, setUserStatus } from '../../models/userModel.js';
 
 //user-management get all user
 export const getAllUsers = async (req, res) => {
     try {
-      const users = await getAllUsersFromDB(); 
+      const currentAdminId = req.user.id;
+
+      const users = await fetchAllUsers(currentAdminId); 
       if (users && Array.isArray(users)) {
         return res.json({ success: true, users }); 
       } else {

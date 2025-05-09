@@ -27,6 +27,7 @@ export const registerUser = async (req, res) => {
     const { email, password } = req.body;
     const username = email.split('@')[0]; 
     const role = 'user';
+
         // Check if the body is empty
         if (!email || !password) {
           return res.status(400).json({ success: false, message: "Email and password are required." });
@@ -43,9 +44,6 @@ export const registerUser = async (req, res) => {
     try {
       // Check if user exists
       getUser(email, async (err, results) => {
-        if (err) {
-          return res.status(500).json({ success: false, message: 'Error checking user existence.', error: err.message });
-        }
         // Check if email already exists
         if (results.length > 0) {
           return res.status(400).json({ success: false, message: 'User already exists.' });
@@ -56,7 +54,7 @@ export const registerUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Save to DB
-        createUser(username, email, hashedPassword, role, (err, result) => {
+        createUser(username, email, hashedPassword, role, true, (err, result) => {
           if (err) {
             const errorMessage =
               err.code === 'ER_DUP_ENTRY' ? 'User already exists.' : 'DB error';
@@ -92,9 +90,12 @@ export const loginUser = async (req, res) => {
         }
         const user = results[0];
 
+        if (user.is_active === 0) {
+        return res.status(403).json({ success: false, message: 'Your account has been disabled.' });
+        }
+
         // Compare password
         const match = await bcrypt.compare(password, user.password);
-
         if (!match) {
           return res.status(400).json({ success: false, message:"Invalid email or password." });
         }

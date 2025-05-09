@@ -6,8 +6,19 @@
   
   onMount(async () => {
     try {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        throw new Error('No token found. Please try again.');
+      }
+
       console.log('Fetching users from API...');
-      const res = await fetch('http://localhost:3000/api/admin/users/all');
+      const res = await fetch('http://localhost:3000/api/admin/users/all', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        }
+      });
       
       console.log('API response status:', res.status);
       // Check if response is ok before parsing JSON
@@ -32,31 +43,6 @@
       }
     } catch (err) {
       console.error('Error fetching users:', err);
-      // For development - add some sample data when API fails
-      users = [
-        {
-          id: 1,
-          username: 'reesenuts',
-          email: 'reesenuts@gmail.com',
-          role: 'admin',
-          created_at: '2025-04-15T12:00:00',
-          selected: false,
-          status: 'Active',
-          dateCreated: 'Apr 15, 2025',
-          initial: 'R'
-        },
-        {
-          id: 2,
-          username: 'andrei.mayo',
-          email: 'andrei.mayo@gmail.com',
-          role: 'user',
-          created_at: '2025-05-04T12:00:00',
-          selected: false,
-          status: 'Inactive',
-          dateCreated: 'May 04, 2025',
-          initial: 'A'
-        }
-      ];
     }
   });
 </script>

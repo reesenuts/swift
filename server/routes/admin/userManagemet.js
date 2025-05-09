@@ -1,11 +1,11 @@
 import express from 'express';
 import { getAllUsers, deleteUser, toggleUserStatus} from '../../controllers/admin/userManagement.js';
-import { verifyToken } from '../../middleware/verifyToken.js';
+import { verifyAdminToken } from '../../middleware/verifyAdminToken.js';
 
 const router = express.Router();
 
-router.get('/admin/users/all', getAllUsers);
-router.delete('/admin/users/:id', deleteUser);
-router.patch('/admin/users/:id/status', toggleUserStatus);
+router.get('/admin/users/all', verifyAdminToken, getAllUsers);
+router.delete('/admin/users/:id', verifyAdminToken, deleteUser);
+router.patch('/admin/users/:id/status', verifyAdminToken, toggleUserStatus);
 
 export default router;
