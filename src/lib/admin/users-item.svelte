@@ -83,7 +83,7 @@
   </script>
   
   {#if users.length === 0}
-    <div class="p-4 text-center">
+    <div class="p-4 text-center text-[#818181] text-sm mt-10">
       <p>No users found. Add users to see them here.</p>
     </div>
   {:else}

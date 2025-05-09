@@ -38,7 +38,7 @@
       <div class="w-full flex justify-between items-center p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
         <!-- username -->
         <div  class="text-sm text-[#818181] font-medium pl-2 w-[25%] flex items-center gap-4">
-            <p class="text-[#443C68] font-semibold">Firebase Cloud Messaging</p>
+            <p class="text-[#443C68] font-semibold">Semaphore SMS Philippines</p>
         </div>
         <!-- message -->
         <div class="text-sm text-[#6C9B7D] font-medium w-[20%] rounded-2xl bg-[#DBEDDB] p-3 text-center">
@@ -67,8 +67,8 @@
       <!-- table head -->
       <div class="w-full flex justify-between items-center bg-[#FCFCFA] p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
         <p class="text-sm text-[#818181] font-medium pl-2 w-[20%]">API Key</p>
-        <p class="text-sm text-[#818181] font-medium w-[15%]">Sender ID</p>
-        <p class="text-sm text-[#818181] font-medium w-[15%] ml-10">Firebase Region</p>
+        <p class="text-sm text-[#818181] font-medium w-[10%]">Sender ID</p>
+        <p class="text-sm text-[#818181] font-medium w-[15%] ml-10">Semaphore Region</p>
         <p class="text-sm text-[#818181] font-medium w-[25%]">Message Quota</p>
         <p class="text-sm text-[#818181] font-medium w-[20%] ml-10">Actions</p>
       </div>
@@ -79,7 +79,7 @@
             <p class="text-[#443C68] font-semibold">Hashed API Key here</p>
         </div>
         <!-- message -->
-        <p class="text-sm text-[#443C68] font-semibold w-[15%]">
+        <p class="text-sm text-[#443C68] font-semibold w-[10%]">
             Swift Project
         </p>
         <!-- status -->

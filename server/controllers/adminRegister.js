@@ -57,7 +57,7 @@ async function promptAdminRegistration() {
       const hashedPassword = await bcrypt.hash(password, 10);
       const role = 'admin';
 
-      createUser(username, email, hashedPassword, role, (err, result) => {
+      createUser(username, email, hashedPassword, role, true, (err, result) => {
         if (err) {
           console.error('Error creating admin:', err.message);
         } else {
