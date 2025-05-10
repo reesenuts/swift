@@ -91,7 +91,7 @@
     <div class="w-full flex justify-between items-center p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
         <p class="text-xs text-[#818181] font-medium pl-2 w-[5%]">{String(user.id).padStart(3, '0')}</p>
         <!-- username -->
-        <div class="text-sm text-[#818181] font-medium pl-2 w-[15%] flex items-center gap-4">
+        <div class="text-sm text-[#818181] font-medium pl-2 w-[20%] flex items-center gap-4">
             <!-- avatar -->
             <div class="h-10 w-10 border-1 border-[#443c6846] rounded-full text-sm flex items-center justify-center font-medium text-[#443C68] bg-[#443c6836]">
                 {user.initial}

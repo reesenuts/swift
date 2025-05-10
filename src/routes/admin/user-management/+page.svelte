@@ -78,7 +78,7 @@
       <!-- table head -->
       <div class="w-full flex justify-between items-center bg-[#FCFCFA] p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
         <p class="text-sm text-[#818181] font-medium pl-2 w-[5%]">ID</p>
-        <p class="text-sm text-[#818181] font-medium pl-2 w-[15%]">Username</p>
+        <p class="text-sm text-[#818181] font-medium pl-2 w-[20%]">Username</p>
         <p class="text-sm text-[#818181] font-medium w-[10%]">Role</p>
         <p class="text-sm text-[#818181] font-medium w-[15%] ml-10">Status</p>
         <p class="text-sm text-[#818181] font-medium w-[15%] pl-10">Date Created</p>
