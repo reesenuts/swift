@@ -50,7 +50,7 @@
       <div class="mb-4 flex items-center justify-between border-b border-[#ebebeb] pb-4">
         <!-- header -->
         {#if title}
-            <h2 id="modal-title" class=" flex items-center gap-3 text-lg font-bold text-[#443C68]">{title}<span class="text-xs text-[#443C68] font-semibold p-2 bg-[#443C68]/10 rounded-lg">001</span></h2>
+            <h2 id="modal-title" class=" flex items-center gap-3 text-lg font-bold text-[#443C68]">{title}</h2>
         {/if}
         <!-- close button -->
         <button class="ml-auto rounded-full p-3 text-gray-400 hover:bg-gray-100 hover:text-gray-600 cursor-pointer transition-colors duration-200 ease-in-out"
