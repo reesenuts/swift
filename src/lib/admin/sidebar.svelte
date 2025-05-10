@@ -236,12 +236,12 @@
     <!-- User Profile -->
     <div class="bg-[#f9f9f9] flex items-center gap-2 p-2 rounded-full">
       <div
-        class="h-10 w-10 rounded-full text-sm flex items-center justify-center font-semibold text-[#443C68] bg-[#443c6836]"
+        class="h-10 w-10 rounded-full text-sm border-1 border-[#443c6846] flex items-center justify-center font-medium text-[#443C68] bg-[#443c6836]"
       >
         {currentUser.initial}
       </div>
       <div class="text-xs">
-        <p class="text-[#443C68] font-bold">{currentUser.username}</p>
+        <p class="text-[#443C68] font-medium">{currentUser.username}</p>
         <p class="text-[#A5A4A1]">{currentUser.email}</p>
       </div>
     </div>

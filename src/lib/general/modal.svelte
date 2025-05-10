@@ -41,36 +41,24 @@
 
     <!-- modal -->
     <div
-      class="relative z-50 w-full max-w-lg rounded-lg bg-white p-6 shadow-xl"
+      class="relative z-50 w-full max-w-lg rounded-2xl bg-white px-6 pt-6 pb-2 border-1 border-[#EBEBE8]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
       transition:scale={{ duration: 200, start: 0.95 }}
     >
-      <div class="mb-4 flex items-center justify-between">
+      <div class="mb-4 flex items-center justify-between border-b border-[#ebebeb] pb-4">
         <!-- header -->
         {#if title}
-          <h2 id="modal-title" class="text-xl font-semibold">{title}</h2>
+            <h2 id="modal-title" class=" flex items-center gap-3 text-lg font-bold text-[#443C68]">{title}<span class="text-xs text-[#443C68] font-semibold p-2 bg-[#443C68]/10 rounded-lg">001</span></h2>
         {/if}
         <!-- close button -->
-        <button
-          class="ml-auto rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+        <button class="ml-auto rounded-full p-3 text-gray-400 hover:bg-gray-100 hover:text-gray-600 cursor-pointer transition-colors duration-200 ease-in-out"
           on:click={closeModal}
-          aria-label="Close modal"
-        >
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          aria-label="close modal" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#818181" viewBox="0 0 256 256">
+                <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+            </svg>
         </button>
       </div>
 

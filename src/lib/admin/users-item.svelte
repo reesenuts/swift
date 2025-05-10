@@ -91,48 +91,48 @@
     <div class="w-full flex justify-between items-center p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
         <p class="text-xs text-[#818181] font-medium pl-2 w-[5%]">{String(user.id).padStart(3, '0')}</p>
         <!-- username -->
-        <div class="text-sm text-[#818181] font-medium pl-2 w-[25%] flex items-center gap-4">
+        <div class="text-sm text-[#818181] font-medium pl-2 w-[15%] flex items-center gap-4">
             <!-- avatar -->
-            <div class="h-10 w-10 border-1 border-[#443c6846] rounded-full text-sm flex items-center justify-center font-semibold text-[#443C68] bg-[#443c6836]">
+            <div class="h-10 w-10 border-1 border-[#443c6846] rounded-full text-sm flex items-center justify-center font-medium text-[#443C68] bg-[#443c6836]">
                 {user.initial}
             </div>
             <!-- username and email -->
             <div class="text-xs">
-            <p class="text-[#443C68] font-semibold">{user.username}</p>
+            <p class="text-[#443C68] font-medium">{user.username}</p>
             <p class="text-[#A5A4A1]">{user.email}</p>
             </div>
         </div>
         <!-- role -->
-        <div class="text-xs {user.role?.toLowerCase() === 'admin' ? 'text-[#FFFFFF] bg-[#443c68d2]' : 'text-[#443C68] bg-[#443c681c]'} w-[10%] font-medium p-3 rounded-2xl text-center">
+        <div class="text-xs {user.role?.toLowerCase() === 'admin' ? 'text-[#443c68] bg-[#EBEBE8]/80' : 'text-[#443C68] bg-[#EBEBE8]/80'} w-[10%] font-medium p-3 rounded-lg text-center">
             {user.role?.toLowerCase() === 'admin' ? 'Admin' : 'User'}
         </div>
         <!-- status -->
-        <div class="text-xs {user.status === 'Active' ? 'text-[#6C9B7D] bg-[#DBEDDB]' : 'text-[#91918E] bg-[#E3E2E0]'} font-medium w-[15%] p-3 text-center rounded-2xl ml-10">
+        <div class="text-xs {user.status === 'Active' ? 'text-[#6C9B7D] bg-[#DBEDDB]/50' : 'text-[#91918E] bg-[#E3E2E0]/50'} font-medium w-[15%] p-3 text-center rounded-lg ml-10">
             {user.status}
         </div>
         <!-- date created -->
-        <p class="text-xs text-[#443C68] font-medium w-[15%] pl-10">
+        <p class="text-xs text-[#818181] w-[15%] pl-10">
             {user.dateCreated}
         </p>
         <!-- actions -->
         <div class="flex gap-2 w-[20%]">
             {#if user.status === 'Active'}
             <button 
-              class="text-xs text-[#E16F64] border-1 border-[#E16F64] p-3 rounded-lg font-medium bg-[#FFE2DD] cursor-pointer hover:bg-[#e16e643f] transition duration-200 ease-in-out w-full"
+              class="text-xs text-[#E16F64] border-1 border-[#E16F64] p-3 rounded-lg font-medium bg-[#FFE2DD]/20 cursor-pointer hover:bg-[#e16e643f] transition duration-200 ease-in-out w-full"
               on:click={() => handleStatusChange(user.id, 'Inactive')}
             >
               Disable
             </button>
             {:else}
             <button 
-              class="text-xs text-[#6C9B7D] border-1 border-[#6C9B7D] p-3 rounded-lg font-medium bg-[#DBEDDB] cursor-pointer hover:bg-[#6c9b7d53] transition duration-200 ease-in-out w-full"
+              class="text-xs text-[#6C9B7D] border-1 border-[#6C9B7D] p-3 rounded-lg font-medium bg-[#DBEDDB]/20 cursor-pointer hover:bg-[#6c9b7d53] transition duration-200 ease-in-out w-full"
               on:click={() => handleStatusChange(user.id, 'Active')}
             >
               Enable
             </button>
             {/if}
             <button 
-              class="text-xs text-[#818181] border-1 border-[#E16F64] font-medium w-full p-3 rounded-lg flex items-center gap-2 justify-center bg-[#FFE2DD] cursor-pointer hover:bg-[#e16e643f] transition duration-200 ease-in-out"
+              class="text-xs text-[#818181] border-1 border-[#E16F64] font-medium w-full p-3 rounded-lg flex items-center gap-2 justify-center bg-[#FFE2DD]/20 cursor-pointer hover:bg-[#e16e643f] transition duration-200 ease-in-out"
               on:click={() => handleDeleteUser(user.id)}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#E16F64" viewBox="0 0 256 256">

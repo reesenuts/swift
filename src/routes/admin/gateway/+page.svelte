@@ -28,7 +28,7 @@
     <div class="p-6"> 
       <!-- table head -->
       <div class="w-full flex justify-between items-center bg-[#FCFCFA] p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
-        <p class="text-sm text-[#818181] font-medium pl-2 w-[25%]">Provider</p>
+        <p class="text-sm text-[#818181] font-medium pl-2 w-[20%]">Provider</p>
         <p class="text-sm text-[#818181] font-medium w-[20%]">Status</p>
         <p class="text-sm text-[#818181] font-medium w-[15%] ml-10">Last Checked</p>
         <p class="text-sm text-[#818181] font-medium w-[15%]">Health</p>
@@ -37,19 +37,19 @@
       <!-- table head -->
       <div class="w-full flex justify-between items-center p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
         <!-- username -->
-        <div  class="text-sm text-[#818181] font-medium pl-2 w-[25%] flex items-center gap-4">
-            <p class="text-[#443C68] font-semibold">Semaphore SMS Philippines</p>
+        <div  class="text-sm text-[#818181] font-medium pl-2 w-[20%] flex items-center gap-4">
+            <p class="text-[#443C68] font-medium">Semaphore SMS Philippines</p>
         </div>
         <!-- message -->
-        <div class="text-sm text-[#6C9B7D] font-medium w-[20%] rounded-2xl bg-[#DBEDDB] p-3 text-center">
+        <div class="text-sm text-[#6C9B7D] font-medium w-[20%] rounded-lg bg-[#DBEDDB]/50 p-3 text-center">
             Connected
         </div>
         <!-- status -->
-        <div class="text-sm text-[#818181] font-medium w-[15%] ml-10">
+        <div class="text-sm text-[#818181] w-[15%] ml-10">
             May 06, 2025 2:56 PM
         </div>
         <!-- date sent -->
-        <div class="text-sm text-[#6C9B7D] font-medium w-[15%] rounded-2xl bg-[#DBEDDB] p-3 text-center">
+        <div class="text-sm text-[#6C9B7D] font-medium w-[15%] rounded-lg bg-[#DBEDDB]/50 p-3 text-center">
           Operational
         </div>
         <!-- recipeint -->
@@ -66,30 +66,30 @@
       </h1>
       <!-- table head -->
       <div class="w-full flex justify-between items-center bg-[#FCFCFA] p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
-        <p class="text-sm text-[#818181] font-medium pl-2 w-[20%]">API Key</p>
+        <p class="text-sm text-[#818181] font-medium pl-2 w-[15%]">API Key</p>
         <p class="text-sm text-[#818181] font-medium w-[10%]">Sender ID</p>
-        <p class="text-sm text-[#818181] font-medium w-[15%] ml-10">Semaphore Region</p>
+        <p class="text-sm text-[#818181] font-medium w-[15%]">Semaphore Region</p>
         <p class="text-sm text-[#818181] font-medium w-[25%]">Message Quota</p>
         <p class="text-sm text-[#818181] font-medium w-[20%] ml-10">Actions</p>
       </div>
        <!-- table head -->
        <div class="w-full flex justify-between items-center p-4 rounded-lg gap-4 border-1 border-[#EBEBE8] mb-2">
         <!-- username -->
-        <div  class="text-sm text-[#818181] font-medium pl-2 w-[20%] flex items-center gap-4">
-            <p class="text-[#443C68] font-semibold">Hashed API Key here</p>
+        <div  class="text-sm text-[#818181] font-medium pl-2 w-[15%] flex items-center gap-4">
+            <p class="text-[#443C68] font-medium">API Key (Hashed)</p>
         </div>
         <!-- message -->
-        <p class="text-sm text-[#443C68] font-semibold w-[10%]">
+        <p class="text-sm text-[#443C68] font-medium w-[10%]">
             Swift Project
         </p>
         <!-- status -->
-        <div class="text-sm text-[#818181] font-medium w-[15%] ml-10">
+        <div class="text-sm text-[#818181] w-[15%]">
             Zambales, Philippines
         </div>
         <!-- date sent -->
         <div class="text-sm flex gap-2 font-medium w-[25%] text-center">
-          <div class="text-[#E16F64] bg-[#FFE2DD] p-3 rounded-2xl w-full">Used: 100</div>
-          <div class="text-[#6C9B7D] bg-[#DBEDDB] p-3 rounded-2xl w-full">Remaining: 1098</div>
+          <div class="text-[#E16F64] bg-[#FFE2DD]/50 p-3 rounded-lg w-full">Used: 100</div>
+          <div class="text-[#6C9B7D] bg-[#DBEDDB]/50 p-3 rounded-lg w-full">Remaining: 1098</div>
         </div>
         <!-- recipeint -->
         <button class="text-sm w-[20%] text-[#818181] border-1 ml-10 border-[#EBEBE8] font-medium p-3 rounded-lg flex items-center gap-2 justify-center cursor-pointer hover:bg-[#dcdcdc3f] transition duration-200 ease-in-out">
