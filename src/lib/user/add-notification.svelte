@@ -30,16 +30,6 @@
       ></textarea>
     </div>
 
-    <!-- Tags -->
-    <div>
-      <p class="block text-xs text-[#818181]">Tags</p>
-      <input
-        type="text"
-        class="w-full mt-1 p-2 border border-[#EBEBE8] rounded-lg focus:outline-none text-sm"
-        placeholder="Enter tags (comma-separated)"
-      />
-    </div>
-
     <!-- Schedule -->
     <div class="flex gap-4">
       <div class="flex-1">
@@ -53,7 +43,7 @@
         <p class="block text-xs text-[#818181]">Time</p>
         <input
           type="time"
-          class="w-full mt-1 p-2 border border-[#EBEBE8] rounded-lg focus:outline-none text-sm text-[#443C68]"
+          class="w-full mt-1 p-2 border border-[#EBEBE8] rounded-lg focus:outline-none text-xs text-[#443C68]"
         />
       </div>
     </div>
@@ -67,26 +57,27 @@
             <input
               type="text"
               class="flex-1 p-2 border border-[#EBEBE8] rounded-lg focus:outline-none text-sm"
-              placeholder="Enter recipient number"
+              placeholder="Enter recipient number (comma-separated)"
             />
 
           </div>
-     
-        <button
-          type="button"
-          class="text-xs text-[#6C9B7D] px-4 py-3 rounded-lg border border-[#6C9B7D] bg-[#6C9B7D]/10 hover:bg-[#6C9B7D]/10 cursor-pointer transition duration-200 ease-in-out"
-        >
-          Add Recipient
-        </button>
       </div>
+    </div>
+
+    <div>
+      <p class="block text-xs text-[#818181]">Group</p>
+      <select class="w-full mt-1 text-sm text-[#443C68] p-2 border border-[#EBEBE8] rounded-lg focus:outline-none">
+        <option value="" disabled selected>Select a group</option>
+        <option></option>
+      </select>
     </div>
 
     <!-- Buttons -->
     <div class="flex justify-between items-center gap-2">
-        <button class="flex items-center gap-2 mt-15 w-full justify-center text-xs text-[#E16F64] border-1 border-[#E16F64]/50 font-medium p-3 rounded-lg bg-[#E16F64]/10 cursor-pointer hover:bg-[#E16F64]/20 transition duration-200 ease-in-out">   
+        <button class="flex items-center gap-2 mt-10 w-full justify-center text-xs text-[#E16F64] border-1 border-[#E16F64]/50 font-medium p-3 rounded-lg bg-[#E16F64]/10 cursor-pointer hover:bg-[#E16F64]/20 transition duration-200 ease-in-out">   
             Cancel
         </button>
-        <button class="flex items-center gap-2 mt-15 w-full justify-center text-xs text-[#6C9B7D] border-1 border-[#6C9B7D]/50 font-medium p-3 rounded-lg bg-[#6C9B7D]/10 cursor-pointer hover:bg-[#6C9B7D]/20 transition duration-200 ease-in-out">   
+        <button class="flex items-center gap-2 mt-10 w-full justify-center text-xs text-[#6C9B7D] border-1 border-[#6C9B7D]/50 font-medium p-3 rounded-lg bg-[#6C9B7D]/10 cursor-pointer hover:bg-[#6C9B7D]/20 transition duration-200 ease-in-out">   
             Create Notification
         </button>
     </div>
