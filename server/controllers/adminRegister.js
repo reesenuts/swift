@@ -1,7 +1,7 @@
 import readline from 'readline';
 import bcrypt from 'bcrypt';
 import { createUser } from '../models/userModel.js';
-import db, { dbReady } from '../config/db.js';
+import db from '../config/db.js';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -21,8 +21,6 @@ const isStrongPassword = (password) => {
 };
 
 async function promptAdminRegistration() {
-  await dbReady; 
-
   rl.question('Enter admin email: ', (email) => {
     if (!email || email.trim() === '') {
       console.error('Email is required.');

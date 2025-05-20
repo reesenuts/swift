@@ -1,5 +1,8 @@
-<script>
-  export let users = [];
+<script lang="ts">
+  import { api } from "$lib/services/api.js";
+  import type { User } from "$lib/types.js";
+  
+  export let users: User[] = [];
   
   // Log the received users data when it changes
   $: {
@@ -13,7 +16,7 @@
     users = users.map(user => ({ ...user, selected: allSelected }));
   }
   
-  function handleUserSelection(userId, selected) {
+  function handleUserSelection(userId: number, selected: boolean) {
     users = users.map(user => 
       user.id === userId ? { ...user, selected } : user
     );
@@ -22,64 +25,39 @@
     allSelected = users.every(user => user.selected);
   }
   
-  async function handleStatusChange(userId, status) {
-  const is_active = status === 'Active';
+  async function handleStatusChange(userId: number, status: string) {
+    const is_active = status === 'Active';
 
-  try {
-    const res = await fetch(`http://localhost:3000/api/admin/users/${userId}/status`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('authToken')}`
-      },
-      body: JSON.stringify({ is_active })
-    });
-
-    const result = await res.json();
-    if (result.success) {
+    try {
+      await api.admin.users.toggleStatus(userId, is_active);
       users = users.map(user =>
         user.id === userId ? { ...user, status } : user
       );
       console.log(`User ${userId} status updated to ${status}`);
-    } else {
-      alert(`Failed to update status: ${result.message}`);
+    } catch (error) {
+      console.error('Error updating status:', error);
+      alert('An error occurred while updating user status.');
     }
-  } catch (error) {
-    console.error('Error updating status:', error);
-    alert('An error occurred while updating user status.');
   }
-}
   
-  function handleRoleChange(userId, role) {
+  function handleRoleChange(userId: number, role: string) {
     users = users.map(user => 
       user.id === userId ? { ...user, role } : user
     );
   }
   
-  async function handleDeleteUser(userId) {
-  if (!confirm("Are you sure you want to delete this user?")) return;
+  async function handleDeleteUser(userId: number) {
+    if (!confirm("Are you sure you want to delete this user?")) return;
 
-  try {
-    const res = await fetch(`http://localhost:3000/api/admin/users/${userId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('authToken')}`
-      }
-    });
-
-    const result = await res.json();
-    if (result.success) {
+    try {
+      await api.admin.users.delete(userId);
       users = users.filter(user => user.id !== userId);
       console.log('User deleted:', userId);
-    } else {
-      alert(`Failed to delete user: ${result.message}`);
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      alert('An error occurred while deleting the user.');
     }
-  } catch (error) {
-    console.error('Error deleting user:', error);
-    alert('An error occurred while deleting the user.');
   }
-}
   </script>
   
   {#if users.length === 0}

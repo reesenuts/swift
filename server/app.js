@@ -6,7 +6,15 @@ import db from './config/db.js';
 
 // Import routes
 import userRoutes from './routes/userRoutes.js';
-import userManagement  from './routes/admin/userManagemet.js';
+import userManagement from './routes/admin/userManagement.js';
+import contactRoutes from './routes/contactRoutes.js';
+import groupRoutes from './routes/groupRoutes.js';
+import templateRoutes from './routes/templateRoutes.js';
+import messageRoutes from './routes/messageRoutes.js';
+import smsRoutes from './routes/smsRoutes.js';
+import webhookRoutes from './routes/webhookRoutes.js';
+import scheduledMessageRoutes from './routes/scheduledMessageRoutes.js';
+import tagRoutes from './routes/tagRoutes.js';
 
 dotenv.config();
 
@@ -23,6 +31,14 @@ app.use(cors({
 // Routes
 app.use('/api', userRoutes);
 app.use('/api', userManagement);
+app.use('/api', contactRoutes);
+app.use('/api', groupRoutes);
+app.use('/api', templateRoutes);
+app.use('/api', messageRoutes);
+app.use('/api', smsRoutes);
+app.use('/api', scheduledMessageRoutes);
+app.use('/api', tagRoutes);
+app.use('/webhook', webhookRoutes);
 
 // Default route
 app.get('/', (req, res) => {
