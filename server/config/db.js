@@ -3,24 +3,22 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS, 
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    connectionLimit: 10
 });
 
-const dbReady = new Promise((resolve, reject) => {
-    db.connect((err) => {
-      if (err) {
+// Test the connection
+db.getConnection((err, connection) => {
+    if (err) {
         console.error('MySQL connection error:', err.message);
-        reject(err);
-      } else {
-        console.log('MySQL connected successfully!');
-        resolve();
-      }
-    });
-  });
-  
-  export default db;
-  export { dbReady };
+        throw err;
+    }
+    console.log('MySQL connected successfully!');
+    connection.release();
+});
+
+export default db;

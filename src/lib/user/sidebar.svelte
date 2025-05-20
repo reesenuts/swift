@@ -4,7 +4,11 @@
     import { onMount } from 'svelte';
     
     let activePath = 'dashboard';
-    let currentUser = { username: '', email: '' };
+    let currentUser = {
+    username: "",
+    email: "",
+    initial: "",
+  };
 
     $: {
         const path = $page.url.pathname;
@@ -29,7 +33,7 @@
             return;
         }
 
-        const response = await fetch('http://localhost:3000/api/...', {
+        const response = await fetch('http://localhost:3000/api/me', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -38,7 +42,11 @@
       const data = await response.json();
 
       if (response.ok) {
-        currentUser = data;
+        currentUser = {
+          username: data.username,
+          email: data.email,
+          initial: data.username ? data.username[0].toUpperCase() : "",
+        };
       } else {
         console.error('Not authenticated');
         goto('/login');
@@ -88,18 +96,6 @@
                 <p class="text-sm {activePath === 'user/dashboard' ? 'text-[#443C68] font-medium' : 'text-[#818181]'}">Dashboard</p>
             </div>
 
-            <!-- notifications -->
-            <!-- svelte-ignore a11y_click_events_have_key_events -->
-            <!-- svelte-ignore a11y_no_static_element_interactions -->
-            <div class="flex items-center gap-5 cursor-pointer hover:bg-[#f9f9f9] p-4 rounded-2xl 
-                {activePath === 'user/notifications' ? 'bg-[#f9f9f9]' : 'bg-transparent'}"
-                on:click={() => handlePathClick('user/notifications')}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="{activePath === 'user/notifications' ? '#443C68' : '#818181'}" viewBox="0 0 256 256">
-                    <path d="M168,224a8,8,0,0,1-8,8H96a8,8,0,1,1,0-16h64A8,8,0,0,1,168,224Zm53.85-32A15.8,15.8,0,0,1,208,200H48a16,16,0,0,1-13.8-24.06C39.75,166.38,48,139.34,48,104a80,80,0,1,1,160,0c0,35.33,8.26,62.38,13.81,71.94A15.89,15.89,0,0,1,221.84,192ZM208,184c-7.73-13.27-16-43.95-16-80a64,64,0,1,0-128,0c0,36.06-8.28,66.74-16,80Z"></path>
-                </svg>
-                <p class="text-sm {activePath === 'user/notifications' ? 'text-[#443C68] font-medium' : 'text-[#818181]'}">Notifications</p>
-            </div>
-
             <!-- contacts -->
             <!-- svelte-ignore a11y_click_events_have_key_events -->
             <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -111,6 +107,18 @@
                 </svg>
                 <p class="text-sm {activePath === 'user/contacts' ? 'text-[#443C68] font-medium' : 'text-[#818181]'}">Contacts</p>
             </div>
+            <!-- messages -->
+            <!-- svelte-ignore a11y_click_events_have_key_events -->
+            <!-- svelte-ignore a11y_no_static_element_interactions -->
+            <div class="flex items-center gap-5 cursor-pointer hover:bg-[#f9f9f9] p-4 rounded-2xl 
+                {activePath === 'user/messages' ? 'bg-[#f9f9f9]' : 'bg-transparent'}"
+                on:click={() => handlePathClick('user/messages')}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="{activePath === 'user/messages' ? '#443C68' : '#818181'}" viewBox="0 0 256 256">
+                    <path d="M168,224a8,8,0,0,1-8,8H96a8,8,0,1,1,0-16h64A8,8,0,0,1,168,224Zm53.85-32A15.8,15.8,0,0,1,208,200H48a16,16,0,0,1-13.8-24.06C39.75,166.38,48,139.34,48,104a80,80,0,1,1,160,0c0,35.33,8.26,62.38,13.81,71.94A15.89,15.89,0,0,1,221.84,192ZM208,184c-7.73-13.27-16-43.95-16-80a64,64,0,1,0-128,0c0,36.06-8.28,66.74-16,80Z"></path>
+                </svg>
+                <p class="text-sm {activePath === 'user/messages' ? 'text-[#443C68] font-medium' : 'text-[#818181]'}">Notifications</p>
+            </div>
+
 
             <!-- templates -->
             <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -129,10 +137,10 @@
     <div class="space-y-2 mt-8">
         <!-- user profile -->
         <div class="bg-[#f9f9f9] flex items-center gap-2 p-2 rounded-full">
-            <div class="h-10 w-10 rounded-full text-sm flex items-center justify-center font-medium text-[#443C68] bg-[#443c6836]">S</div>
+            <div class="h-10 w-10 rounded-full text-sm flex items-center justify-center font-medium text-[#443C68] bg-[#443c6836]"> {currentUser.initial}</div>
             <div class="text-xs">
-                <p class="text-[#443C68] font-medium">SWIFT USER</p>
-                <p class="text-[#A5A4A1]">swift@user.com</p>
+                <p class="text-[#443C68] font-medium">{currentUser.username}</p>
+                <p class="text-[#A5A4A1]">{currentUser.email}</p>
             </div>
         </div>
         <!-- logout button -->

@@ -8,4 +8,4 @@ router.get('/admin/users/all', verifyAdminToken, getAllUsers);
 router.delete('/admin/users/:id', verifyAdminToken, deleteUser);
 router.patch('/admin/users/:id/status', verifyAdminToken, toggleUserStatus);
 
-export default router;
+export default router; 

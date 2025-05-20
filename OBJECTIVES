@@ -1,0 +1,23 @@
+The app we are going to make is an SMS text blaster.
+
+The core features must include:
+Integration with SMS gateway API
+Contact list management
+Message scheduling and queuing
+Delivery status tracking
+Templates for frequently sent messages
+
+We need to:
+Use third-party services to send an dreceive SMS messages/
+Organize recipients intro groups and tags for trargeted messaging.
+Allow messages to be sent at a later time or in batches.
+Confirm which messages were sent, devliered, or failed.
+Save and reuse standard message formats
+
+
+
+The stack we are using is:
+Express  
+Sveltekit (Strictly use Typescript)
+Mysql
+Vonage for sms
